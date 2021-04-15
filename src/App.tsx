@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import firebase from "firebase/app";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/functions";
+import { FirebaseAuthProvider } from "@react-firebase/auth";
+import routes from "./routes";
+import { Register, SongEdit, SongAdd, SongList, Login } from "./pages";
+import StoreProvider from "./storeProvider";
+import { Menu } from "./components";
 
-function App() {
+// TODO add config
+const firebaseConfig = {};
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <StoreProvider>
+        <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
+          <Switch>
+            <Route path={routes.login}>
+              <Login />
+            </Route>
+            <Route path={routes.register}>
+              <Register />
+            </Route>
+            <Route path={routes.addSong}>
+              <SongAdd />
+            </Route>
+            <Route path={routes.song()}>
+              <SongEdit />
+            </Route>
+            <Route path={routes.root}>
+              <SongList />
+            </Route>
+          </Switch>
+          <Menu />
+        </FirebaseAuthProvider>
+      </StoreProvider>
+    </Router>
   );
-}
+};
 
 export default App;

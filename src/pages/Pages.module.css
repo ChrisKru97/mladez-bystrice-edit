@@ -1,0 +1,54 @@
+.wrapper,
+.authWrapper {
+  background-color: rgb(216, 252, 213);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authWrapper {
+  flex-direction: column;
+}
+
+.songButtonWrapper {
+  padding-top: 10px;
+}
+
+.songButton {
+  margin-right: 20px;
+  display: flex;
+  font-size: 20px;
+  cursor: pointer;
+  align-items: center;
+  box-shadow: 0 0 5px 2px inset rgba(0, 0, 0, 0.4),
+    6px 6px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 10px;
+  padding-left: 20px;
+  height: 40px;
+  background-color: white;
+}
+
+.songFormLayout {
+  width: 50%;
+  min-width: 400px;
+  overflow: auto;
+  max-height: calc(100vh - 40px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  margin: 20px;
+  font-size: 25px;
+}
+
+.googleButton {
+  width: 400px;
+  opacity: 0.8;
+  background-color: white;
+  border: none;
+  box-shadow: 0 0 3px black;
+}
