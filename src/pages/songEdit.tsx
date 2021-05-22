@@ -13,10 +13,10 @@ const SongEdit: React.FC = () => {
   const { push } = useHistory();
   const { data, refetch } = React.useContext<ContextState>(SongContext);
 
-  const song: Song = React.useMemo(() => data?.[songId] ?? ({} as Song), [
-    data,
-    songId,
-  ]);
+  const song: Song = React.useMemo(
+    () => data?.[songId] ?? ({} as Song),
+    [data, songId]
+  );
 
   const onSubmit = React.useCallback(
     async (newData: Record<string, string>) => {

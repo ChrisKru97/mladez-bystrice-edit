@@ -40,11 +40,12 @@ const SongList: React.FC = () => {
     <div className={styles.wrapper}>
       {orderedList ? (
         <List
+          className={styles.mystyle}
           height={window.innerHeight}
           rowCount={orderedList.length}
           rowHeight={80}
           rowRenderer={rowRenderer}
-          width={window.innerWidth > 600 ? 600 : window.innerWidth}
+          width={window.innerWidth}
         />
       ) : (
         <Loader />

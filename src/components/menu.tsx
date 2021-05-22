@@ -8,11 +8,11 @@ import MenuButton from "./menuButton";
 
 const Menu: React.FC = () => {
   const listenerFunction = React.useRef<() => void>();
+  const numberInputRef = React.useRef<HTMLInputElement>(null);
   const { push } = useHistory();
   const [show, setShow] = React.useState<boolean>(false);
-  const { maxNumber, getId, data, refetch } = useContext<ContextState>(
-    SongContext
-  );
+  const { maxNumber, getId, data, refetch } =
+    useContext<ContextState>(SongContext);
 
   const addToSongs = React.useCallback(
     async (songId: string) => {
@@ -27,6 +27,12 @@ const Menu: React.FC = () => {
     },
     [push, refetch]
   );
+
+  React.useEffect(() => {
+    if (show) {
+      numberInputRef.current?.focus();
+    }
+  }, [show]);
 
   const onKeyPress = React.useCallback(
     (e: React.KeyboardEvent) => {
@@ -102,6 +108,7 @@ const Menu: React.FC = () => {
           />
           <Route path={routes.root}>
             <input
+              ref={numberInputRef}
               placeholder="Číslo písně..."
               onClick={stopPropagationAndHide(undefined, true)}
               className={styles.menuButton}
