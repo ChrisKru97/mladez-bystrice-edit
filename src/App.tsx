@@ -20,33 +20,31 @@ const firebaseConfig = {
   appId: "1:207934052135:web:4934c11d305f30970f7b02",
 };
 
-const App: React.FC = () => {
-  return (
-    <Router>
-      <StoreProvider>
-        <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
-          <Switch>
-            <Route path={routes.login}>
-              <Login />
-            </Route>
-            <Route path={routes.register}>
-              <Register />
-            </Route>
-            <Route path={routes.addSong}>
-              <SongAdd />
-            </Route>
-            <Route path={routes.song()}>
-              <SongEdit />
-            </Route>
-            <Route path={routes.root}>
-              <SongList />
-            </Route>
-          </Switch>
-          <Menu />
-        </FirebaseAuthProvider>
-      </StoreProvider>
-    </Router>
-  );
-};
+const App: React.FC = () => (
+  <Router>
+    <StoreProvider>
+      <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
+        <Switch>
+          <Route path={routes.login}>
+            <Login />
+          </Route>
+          <Route path={routes.register}>
+            <Register />
+          </Route>
+          <Route path={routes.addSong}>
+            <SongAdd />
+          </Route>
+          <Route path={routes.song()}>
+            <SongEdit />
+          </Route>
+          <Route path={routes.root}>
+            <SongList />
+          </Route>
+        </Switch>
+        <Menu />
+      </FirebaseAuthProvider>
+    </StoreProvider>
+  </Router>
+);
 
 export default App;

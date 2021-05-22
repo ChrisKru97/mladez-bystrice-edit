@@ -9,3 +9,8 @@ input:focus,
 textarea:focus {
   outline: none;
 }
+
+.ReactVirtualized__Grid__innerScrollContainer {
+  max-width: 600px !important;
+  margin: 0 auto;
+}

@@ -15,7 +15,7 @@ const Input: React.FC<IProps> = ({
   type = "text",
 }) => {
   return (
-    <label htmlFor={name}>
+    <label htmlFor={name} className={styles.inputWrapper}>
       <span className={styles.inputLabel}>{label}</span>
       {type === "textarea" ? (
         <textarea
