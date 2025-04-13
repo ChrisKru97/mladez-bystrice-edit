@@ -13,7 +13,7 @@ export const en: Translations = {
   "Logout": "Logout",
   "Login": "Login",
   "Register": "Register",
-  
+
   // Song form
   "Song Name": "Song Name",
   "Enter song name": "Enter song name",
@@ -25,14 +25,14 @@ export const en: Translations = {
   "Cancel": "Cancel",
   "Saving...": "Saving...",
   "Update Song": "Update Song",
-  
+
   // Song list
   "Error loading songs: {error}": "Error loading songs: {error}",
   "Search songs by name or number...": "Search songs by name or number...",
   "No songs found. Add your first song!": "No songs found. Add your first song!",
   "No songs match your search.": "No songs match your search.",
   "Number: {number}": "Number: {number}",
-  
+
   // Login page
   "An error occurred during login. Please try again.": "An error occurred during login. Please try again.",
   "An error occurred during Google login. Please try again.": "An error occurred during Google login. Please try again.",
@@ -45,7 +45,7 @@ export const en: Translations = {
   "Sign in with Google": "Sign in with Google",
   "Don't have an account?": "Don't have an account?",
   "Register here": "Register here",
-  
+
   // Register page
   "Passwords do not match": "Passwords do not match",
   "Password must be at least 6 characters long": "Password must be at least 6 characters long",
@@ -55,11 +55,11 @@ export const en: Translations = {
   "Registering...": "Registering...",
   "Already have an account?": "Already have an account?",
   "Login here": "Login here",
-  
+
   // Add song page
   "An error occurred while adding the song. Please try again.": "An error occurred while adding the song. Please try again.",
   "Add New Song": "Add New Song",
-  
+
   // Edit song page
   "Song not found": "Song not found",
   "An error occurred while updating the song. Please try again.": "An error occurred while updating the song. Please try again.",
@@ -78,7 +78,7 @@ export const cs: Translations = {
   "Logout": "Odhlásit se",
   "Login": "Přihlásit se",
   "Register": "Registrovat se",
-  
+
   // Song form
   "Song Name": "Název písně",
   "Enter song name": "Zadejte název písně",
@@ -90,14 +90,14 @@ export const cs: Translations = {
   "Cancel": "Zrušit",
   "Saving...": "Ukládání...",
   "Update Song": "Aktualizovat píseň",
-  
+
   // Song list
   "Error loading songs: {error}": "Chyba při načítání písní: {error}",
   "Search songs by name or number...": "Hledat písně podle názvu nebo čísla...",
   "No songs found. Add your first song!": "Nebyly nalezeny žádné písně. Přidejte svou první píseň!",
   "No songs match your search.": "Žádné písně neodpovídají vašemu vyhledávání.",
   "Number: {number}": "Číslo: {number}",
-  
+
   // Login page
   "An error occurred during login. Please try again.": "Při přihlašování došlo k chybě. Zkuste to prosím znovu.",
   "An error occurred during Google login. Please try again.": "Při přihlašování přes Google došlo k chybě. Zkuste to prosím znovu.",
@@ -110,7 +110,7 @@ export const cs: Translations = {
   "Sign in with Google": "Přihlásit se přes Google",
   "Don't have an account?": "Nemáte účet?",
   "Register here": "Zaregistrujte se zde",
-  
+
   // Register page
   "Passwords do not match": "Hesla se neshodují",
   "Password must be at least 6 characters long": "Heslo musí mít alespoň 6 znaků",
@@ -120,11 +120,11 @@ export const cs: Translations = {
   "Registering...": "Registrace...",
   "Already have an account?": "Již máte účet?",
   "Login here": "Přihlaste se zde",
-  
+
   // Add song page
   "An error occurred while adding the song. Please try again.": "Při přidávání písně došlo k chybě. Zkuste to prosím znovu.",
   "Add New Song": "Přidat novou píseň",
-  
+
   // Edit song page
   "Song not found": "Píseň nebyla nalezena",
   "An error occurred while updating the song. Please try again.": "Při aktualizaci písně došlo k chybě. Zkuste to prosím znovu.",
@@ -141,7 +141,9 @@ export const defaultLanguage = 'cs';
 // Helper function to get a translation
 export function t(key: string, params: Record<string, string | number> = {}): string {
   const translation = cs[key] || key;
-  
+
+  if(key.startsWith("Place chords"))console.log(key, translation)
+
   // Replace parameters in the translation
   return Object.entries(params).reduce((result, [param, value]) => {
     return result.replace(`{${param}}`, String(value));

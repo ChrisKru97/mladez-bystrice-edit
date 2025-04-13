@@ -51,7 +51,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     try {
       // Get all songs ordered by number
       const orderedQuery = query(
-        collection(db, 'songs'),
+        collection(db, 'songs_next'),
         orderBy('number')
       );
 

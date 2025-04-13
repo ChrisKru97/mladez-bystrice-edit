@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/lib/firebase';
+import {t} from "@/lib/translations";
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -64,19 +65,19 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="card">
           <h1 className="mb-6 text-center text-2xl font-bold text-gray-800 dark:text-white">
-            Login to Songbook Editor
+            {t("Login to Songbook Editor")}
           </h1>
 
           {error && (
             <div className="mb-4 rounded-md bg-red-50 p-4 text-sm text-red-700 dark:bg-red-900/50 dark:text-red-200">
-              {error}
+              {t(error)}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Email
+                {t("Email")}
               </label>
               <input
                 id="email"
@@ -84,14 +85,14 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="input w-full"
-                placeholder="your@email.com"
+                placeholder="tvuj@email.com"
                 required
               />
             </div>
 
             <div>
               <label htmlFor="password" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Password
+                {t("Password")}
               </label>
               <input
                 id="password"
@@ -126,17 +127,17 @@ export default function LoginPage() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Logging in...
+                  {t("Logging in...")}
                 </span>
               ) : (
-                'Login'
+                  t("Login")
               )}
             </button>
           </form>
 
           <div className="mt-4 flex items-center justify-center">
             <div className="border-t border-gray-300 flex-grow dark:border-gray-700"></div>
-            <span className="mx-4 text-sm text-gray-500 dark:text-gray-400">OR</span>
+            <span className="mx-4 text-sm text-gray-500 dark:text-gray-400">{t("OR")}</span>
             <div className="border-t border-gray-300 flex-grow dark:border-gray-700"></div>
           </div>
 
@@ -165,13 +166,13 @@ export default function LoginPage() {
               />
               <path d="M1 1h22v22H1z" fill="none" />
             </svg>
-            Sign in with Google
+            {t("Sign in with Google")}
           </button>
 
           <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-            Don't have an account?{' '}
+            {t("Don't have an account?")}{' '}
             <Link href="/register" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400">
-              Register here
+              {t("Register here")}
             </Link>
           </div>
         </div>

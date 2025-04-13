@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useStore } from '@/lib/store-provider';
+import { t } from '@/lib/translations';
 
 export function SongList() {
   const { songs, loading, error } = useStore();
@@ -45,7 +46,7 @@ export function SongList() {
           <input
             type="text"
             className="input w-full pl-10"
-            placeholder="Search songs by name or number..."
+            placeholder={t("Search songs by name or number...")}
             value={searchTerm}
             onChange={handleSearchChange}
           />

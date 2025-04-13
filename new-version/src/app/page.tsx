@@ -6,6 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/lib/firebase';
 import { useStore } from '@/lib/store-provider';
 import { SongList } from '@/components/songs/song-list';
+import {t} from "@/lib/translations";
 
 export default function HomePage() {
   const [user, loading] = useAuthState(auth);
@@ -38,7 +39,7 @@ export default function HomePage() {
 
   return (
     <div className="container mx-auto">
-      <h1 className="mb-6 text-3xl font-bold text-gray-800 dark:text-white">Song List</h1>
+      <h1 className="mb-6 text-3xl font-bold text-gray-800 dark:text-white">{t("Song List")}</h1>
       <SongList />
     </div>
   );

@@ -85,7 +85,7 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
           required
         />
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          Place chords in [square brackets] before the syllable they belong to.
+          {t("Place chords in [square brackets] before the syllable they belong to.")}
         </p>
       </div>
 
@@ -95,7 +95,7 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
           onClick={() => window.history.back()}
           className="btn bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
         >
-          Cancel
+          {t("Cancel")}
         </button>
         <button
           type="submit"

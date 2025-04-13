@@ -8,6 +8,7 @@ import { auth, db } from '@/lib/firebase';
 import { useStore } from '@/lib/store-provider';
 import { SongForm } from '@/components/songs/song-form';
 import { Song } from '@/lib/types';
+import {t} from "@/lib/translations";
 
 export default function EditSongPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -26,7 +27,7 @@ export default function EditSongPage({ params }: { params: { id: string } }) {
       if (songData) {
         setSong(songData);
       } else {
-        setError('Song not found');
+        setError(t('Song not found'));
       }
     }
   }, [id, getSongById]);
@@ -44,16 +45,16 @@ export default function EditSongPage({ params }: { params: { id: string } }) {
     try {
       // Update the song in Firestore
       await updateDoc(doc(db, 'songs', id), songData);
-      
+
       // Refetch songs to update the list
       await refetch();
-      
+
       // Redirect to the song list
       router.push('/');
     } catch (err) {
       setError(
-        err instanceof Error 
-          ? err.message 
+        err instanceof Error
+          ? err.message
           : 'An error occurred while updating the song. Please try again.'
       );
       setIsSubmitting(false);
@@ -71,16 +72,16 @@ export default function EditSongPage({ params }: { params: { id: string } }) {
     try {
       // Delete the song from Firestore
       await deleteDoc(doc(db, 'songs', id));
-      
+
       // Refetch songs to update the list
       await refetch();
-      
+
       // Redirect to the song list
       router.push('/');
     } catch (err) {
       setError(
-        err instanceof Error 
-          ? err.message 
+        err instanceof Error
+          ? err.message
           : 'An error occurred while deleting the song. Please try again.'
       );
       setIsDeleting(false);
@@ -132,18 +133,18 @@ export default function EditSongPage({ params }: { params: { id: string } }) {
           )}
         </button>
       </div>
-      
+
       {error && (
         <div className="mb-6 rounded-md bg-red-50 p-4 text-sm text-red-700 dark:bg-red-900/50 dark:text-red-200">
           {error}
         </div>
       )}
 
-      <SongForm 
+      <SongForm
         initialSong={songWithoutId}
         onSubmit={handleSubmit}
         isSubmitting={isSubmitting}
-        submitButtonText="Update Song"
+        submitButtonText={t("Update Song")}
       />
     </div>
   );

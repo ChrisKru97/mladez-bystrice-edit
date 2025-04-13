@@ -8,6 +8,7 @@ import { auth, db } from '@/lib/firebase';
 import { useStore } from '@/lib/store-provider';
 import { SongForm } from '@/components/songs/song-form';
 import { Song } from '@/lib/types';
+import {t} from "@/lib/translations";
 
 export default function AddSongPage() {
   const [user, loading] = useAuthState(auth);
@@ -28,7 +29,7 @@ export default function AddSongPage() {
 
     try {
       // Add the song to Firestore
-      await addDoc(collection(db, 'songs'), songData);
+      await addDoc(collection(db, 'songs_next'), songData);
 
       // Refetch songs to update the list
       await refetch();
@@ -62,11 +63,11 @@ export default function AddSongPage() {
 
   return (
     <div className="container mx-auto">
-      <h1 className="mb-6 text-3xl font-bold text-gray-800 dark:text-white">Add New Song</h1>
+      <h1 className="mb-6 text-3xl font-bold text-gray-800 dark:text-white">{t("Add New Song")}</h1>
 
       {error && (
         <div className="mb-6 rounded-md bg-red-50 p-4 text-sm text-red-700 dark:bg-red-900/50 dark:text-red-200">
-          {error}
+          {t(error)}
         </div>
       )}
 
@@ -74,7 +75,7 @@ export default function AddSongPage() {
         initialSong={initialSong}
         onSubmit={handleSubmit}
         isSubmitting={isSubmitting}
-        submitButtonText="Add Song"
+        submitButtonText={t("Add Song")}
       />
     </div>
   );
