@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
-import { collection, query, where, orderBy, getDocs, DocumentData } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, DocumentData } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/navigation';
 import { db, auth } from './firebase';
@@ -49,44 +49,27 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     setError(null);
 
     try {
-      // Get songs that need checking
-      const checkRequiredQuery = query(
-        collection(db, 'songs'),
-        where('checkRequired', '==', true)
-      );
-      
       // Get all songs ordered by number
       const orderedQuery = query(
         collection(db, 'songs'),
         orderBy('number')
       );
 
-      const [checkRequiredSnapshot, orderedSnapshot] = await Promise.all([
-        getDocs(checkRequiredQuery),
-        getDocs(orderedQuery),
-      ]);
+      const orderedSnapshot = await getDocs(orderedQuery);
 
-      // Combine the results, removing duplicates
+      // Process the results
       const songsMap = new Map<string, Song>();
-      
-      // Process check required songs
-      checkRequiredSnapshot.forEach((doc) => {
-        const data = doc.data() as DocumentData;
-        songsMap.set(doc.id, { id: doc.id, ...data } as Song);
-      });
-      
+
       // Process ordered songs
       orderedSnapshot.forEach((doc) => {
-        if (!songsMap.has(doc.id)) {
-          const data = doc.data() as DocumentData;
-          songsMap.set(doc.id, { id: doc.id, ...data } as Song);
-        }
+        const data = doc.data() as DocumentData;
+        songsMap.set(doc.id, { id: doc.id, ...data } as Song);
       });
 
       // Convert to array and record
       const songsList = Array.from(songsMap.values());
       const songsRecord: Record<string, Song> = {};
-      
+
       songsList.forEach((song) => {
         if (song.id) {
           songsRecord[song.id] = song;
@@ -113,7 +96,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
 
   const maxNumber = useMemo(() => {
     if (songs.length === 0) return 0;
-    
+
     // Find the highest number
     let highest = 0;
     for (const song of songs) {
@@ -121,7 +104,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         highest = song.number;
       }
     }
-    
+
     return highest;
   }, [songs]);
 

@@ -29,16 +29,16 @@ export default function AddSongPage() {
     try {
       // Add the song to Firestore
       await addDoc(collection(db, 'songs'), songData);
-      
+
       // Refetch songs to update the list
       await refetch();
-      
+
       // Redirect to the song list
       router.push('/');
     } catch (err) {
       setError(
-        err instanceof Error 
-          ? err.message 
+        err instanceof Error
+          ? err.message
           : 'An error occurred while adding the song. Please try again.'
       );
       setIsSubmitting(false);
@@ -57,22 +57,20 @@ export default function AddSongPage() {
   const initialSong: Omit<Song, 'id'> = {
     name: '',
     number: maxNumber + 1,
-    checkRequired: true,
-    withChords: '',
-    withoutChords: '',
+    text: '',
   };
 
   return (
     <div className="container mx-auto">
       <h1 className="mb-6 text-3xl font-bold text-gray-800 dark:text-white">Add New Song</h1>
-      
+
       {error && (
         <div className="mb-6 rounded-md bg-red-50 p-4 text-sm text-red-700 dark:bg-red-900/50 dark:text-red-200">
           {error}
         </div>
       )}
 
-      <SongForm 
+      <SongForm
         initialSong={initialSong}
         onSubmit={handleSubmit}
         isSubmitting={isSubmitting}

@@ -12,7 +12,6 @@ type SongFormProps = {
 
 export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText }: SongFormProps) {
   const [song, setSong] = useState<Omit<Song, 'id'>>(initialSong);
-  const [activeTab, setActiveTab] = useState<'withChords' | 'withoutChords'>('withChords');
 
   // Update form when initialSong changes (useful for edit mode)
   useEffect(() => {
@@ -23,11 +22,8 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
-    
-    if (type === 'checkbox') {
-      const checked = (e.target as HTMLInputElement).checked;
-      setSong((prev) => ({ ...prev, [name]: checked }));
-    } else if (name === 'number') {
+
+    if (name === 'number') {
       setSong((prev) => ({ ...prev, [name]: value ? parseInt(value, 10) : undefined }));
     } else {
       setSong((prev) => ({ ...prev, [name]: value }));
@@ -75,78 +71,21 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
       </div>
 
       <div>
-        <div className="mb-2 flex">
-          <button
-            type="button"
-            className={`flex-1 rounded-t-md px-4 py-2 text-sm font-medium ${
-              activeTab === 'withChords'
-                ? 'bg-white text-primary-700 dark:bg-gray-800 dark:text-primary-400'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-            }`}
-            onClick={() => setActiveTab('withChords')}
-          >
-            With Chords
-          </button>
-          <button
-            type="button"
-            className={`flex-1 rounded-t-md px-4 py-2 text-sm font-medium ${
-              activeTab === 'withoutChords'
-                ? 'bg-white text-primary-700 dark:bg-gray-800 dark:text-primary-400'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-            }`}
-            onClick={() => setActiveTab('withoutChords')}
-          >
-            Without Chords
-          </button>
-        </div>
-
-        {activeTab === 'withChords' && (
-          <div>
-            <label htmlFor="withChords" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Lyrics with Chords
-            </label>
-            <textarea
-              id="withChords"
-              name="withChords"
-              value={song.withChords}
-              onChange={handleChange}
-              className="input min-h-[300px] w-full font-mono"
-              placeholder="Enter lyrics with chord notations"
-              required
-            />
-          </div>
-        )}
-
-        {activeTab === 'withoutChords' && (
-          <div>
-            <label htmlFor="withoutChords" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Lyrics without Chords
-            </label>
-            <textarea
-              id="withoutChords"
-              name="withoutChords"
-              value={song.withoutChords}
-              onChange={handleChange}
-              className="input min-h-[300px] w-full font-mono"
-              placeholder="Enter lyrics without chord notations"
-              required
-            />
-          </div>
-        )}
-      </div>
-
-      <div className="flex items-center">
-        <input
-          id="checkRequired"
-          name="checkRequired"
-          type="checkbox"
-          checked={song.checkRequired}
-          onChange={handleChange}
-          className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-        />
-        <label htmlFor="checkRequired" className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-          Needs review
+        <label htmlFor="text" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          Lyrics with Chords in [brackets]
         </label>
+        <textarea
+          id="text"
+          name="text"
+          value={song.text}
+          onChange={handleChange}
+          className="input min-h-[300px] w-full font-mono"
+          placeholder="Enter lyrics with chords in [brackets], e.g. [G]Amazing [D]grace, how [C]sweet the [G]sound"
+          required
+        />
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          Place chords in [square brackets] before the syllable they belong to.
+        </p>
       </div>
 
       <div className="flex justify-end space-x-4">

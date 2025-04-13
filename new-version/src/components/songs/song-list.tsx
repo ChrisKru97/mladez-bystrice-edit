@@ -8,8 +8,8 @@ export function SongList() {
   const { songs, loading, error } = useStore();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredSongs = songs.filter((song) => 
-    song.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredSongs = songs.filter((song) =>
+    song.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (song.number?.toString() || '').includes(searchTerm)
   );
 
@@ -70,11 +70,6 @@ export function SongList() {
                 <h2 className="text-xl font-semibold text-gray-800 group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400">
                   {song.name}
                 </h2>
-                {song.checkRequired && (
-                  <span className="ml-2 rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                    Needs review
-                  </span>
-                )}
               </div>
               {song.number && (
                 <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -83,7 +78,7 @@ export function SongList() {
               )}
               <div className="mt-4 flex-grow">
                 <div className="line-clamp-3 text-sm text-gray-500 dark:text-gray-400">
-                  {song.withoutChords.substring(0, 150)}...
+                  {song.text.replace(/\[.*?\]/g, '').substring(0, 150)}...
                 </div>
               </div>
             </Link>
