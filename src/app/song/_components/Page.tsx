@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
@@ -10,7 +10,9 @@ import { SongForm } from '@/components/songs/song-form';
 import { Song } from '@/lib/types';
 import {t} from "@/lib/translations";
 
-export default  function EditSongPage({ id }: { id: string }) {
+export default function EditSongPage() {
+    const id = useSearchParams().get('id');
+    if(!id) throw new Error('id is required');
     const [user, loading] = useAuthState(auth);
     const router = useRouter();
     const { getSongById, refetch } = useStore();

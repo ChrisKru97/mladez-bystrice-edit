@@ -64,7 +64,7 @@ export function SongList() {
           {filteredSongs.map((song) => (
             <Link
               key={song.id}
-              href={`/song/${song.id}`}
+              href={`/song/edit?id=${song.id}`}
               className="card group flex flex-col transition-all hover:shadow-lg"
             >
               <div className="flex items-center justify-between">
