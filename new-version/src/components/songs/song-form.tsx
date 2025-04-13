@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Song } from '@/lib/types';
+import { t } from '@/lib/translations';
 
 type SongFormProps = {
   initialSong: Omit<Song, 'id'>;
@@ -40,7 +41,7 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Song Name
+            {t("Song Name")}
           </label>
           <input
             id="name"
@@ -49,14 +50,14 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
             value={song.name}
             onChange={handleChange}
             className="input w-full"
-            placeholder="Enter song name"
+            placeholder={t("Enter song name")}
             required
           />
         </div>
 
         <div>
           <label htmlFor="number" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Song Number
+            {t("Song Number")}
           </label>
           <input
             id="number"
@@ -65,14 +66,14 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
             value={song.number || ''}
             onChange={handleChange}
             className="input w-full"
-            placeholder="Enter song number (optional)"
+            placeholder={t("Enter song number (optional)")}
           />
         </div>
       </div>
 
       <div>
         <label htmlFor="text" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-          Lyrics with Chords in [brackets]
+          {t("Lyrics with Chords in [brackets]")}
         </label>
         <textarea
           id="text"
@@ -80,7 +81,7 @@ export function SongForm({ initialSong, onSubmit, isSubmitting, submitButtonText
           value={song.text}
           onChange={handleChange}
           className="input min-h-[300px] w-full font-mono"
-          placeholder="Enter lyrics with chords in [brackets], e.g. [G]Amazing [D]grace, how [C]sweet the [G]sound"
+          placeholder={t("Enter lyrics with chords in [brackets], e.g. [G]Amazing [D]grace, how [C]sweet the [G]sound")}
           required
         />
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">

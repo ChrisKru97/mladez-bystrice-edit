@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/lib/firebase';
+import { t } from '@/lib/translations';
 
 export function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,7 +82,7 @@ export function Menu() {
                 }`}
                 onClick={toggleMenu}
               >
-                Song List
+                {t("Song List")}
               </Link>
               <Link
                 href="/song/add"
@@ -90,7 +91,7 @@ export function Menu() {
                 }`}
                 onClick={toggleMenu}
               >
-                Add Song
+                {t("Add Song")}
               </Link>
               <button
                 onClick={() => {
@@ -99,7 +100,7 @@ export function Menu() {
                 }}
                 className="mt-4 w-full rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
               >
-                Logout
+                {t("Logout")}
               </button>
             </>
           ) : (
@@ -111,7 +112,7 @@ export function Menu() {
                 }`}
                 onClick={toggleMenu}
               >
-                Login
+                {t("Login")}
               </Link>
               <Link
                 href="/register"
@@ -120,7 +121,7 @@ export function Menu() {
                 }`}
                 onClick={toggleMenu}
               >
-                Register
+                {t("Register")}
               </Link>
             </>
           )}
