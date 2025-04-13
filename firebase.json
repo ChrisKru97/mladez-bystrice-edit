@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "mladezovy-zpevnik-edit",
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
